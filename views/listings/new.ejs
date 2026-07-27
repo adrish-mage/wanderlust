@@ -1,24 +1,85 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WanderLust</title>
-</head>
-<body>
-    <h3>Create a new listing</h3>
-    <form method="POST" action="/listings">
-        <input name="listing[title]" placeholder="Enter the title of your listing" type="text">
-        <br><br>
-        <textarea name="listing[description]" placeholder="Enter the description listing" type="text"></textarea>
-        <br><br>
-        <input name="listing[price]" placeholder="Enter the price of your listing" type="number">
-        <br><br>
-        <input name="listing[location]" placeholder="Enter the location of your listing" type="text">
-        <br><br>
-        <input name="listing[country]" placeholder="Enter the country of your listing" type="text">
-        <button>Add</button>
+<% layout('layouts/boilerplate') -%>
 
-    </form>
-</body>
-</html>
+    <body>
+        <div class="row">
+            <div class="col-8 offset-2">
+                <h3>Create a new listing</h3>
+                <form method="POST" action="/listings">
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Title</label>
+                        <input 
+                            id="title"
+                            name="listing[title]" 
+                            placeholder="Enter the perfect headline" 
+                            type="text"
+                            class="form-control"
+                        />
+                    </div>
+
+                    
+                    <div class="mb-3">
+                        <textarea
+                            name="listing[description]"
+                            class="form-control"
+                            placeholder="Hit the slopes in style with this luxurious ski chalet in the world-famous Aspen ski resort."
+                        ></textarea>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Image Link</label>
+                        <input 
+                            id="image"
+                            name="listing[image]" 
+                            placeholder="enter image URL/Link" 
+                            type="text" 
+                            class="form-control"
+                        />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="price" class="form-label">Price </label>
+                        <input 
+                            id="price" 
+                            name="listing[price]" 
+                            placeholder="&#8377;20,000" 
+                            type="number"
+                            class="form-control"
+                        >
+                    </div>
+                    
+                    <div class="row">
+                        <div class="mb-3 col-md-6">
+                        <label for="location" class="form-label">Location</label>
+                        <input 
+                            id="location" 
+                            name="listing[location]" 
+                            placeholder="London" 
+                            type="text"
+                            class="form-control"
+                        >
+                    </div>
+                    
+                    
+                    <div class="mb-3 col-md-6">
+                        <label for="country" class="form-label">Country</label>
+                        <input 
+                            id="country" 
+                            name="listing[country]" 
+                            placeholder="United Kingdom" 
+                            type="text"
+                            class="form-control"
+                        >
+                    </div>
+                    </div>
+                    
+                    
+                
+                    
+
+                    
+                    <button btn btn-dark>Add</button>
+
+                </form>
+            </div>
+        </div>
+    </body>

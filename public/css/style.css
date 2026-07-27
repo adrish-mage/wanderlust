@@ -1,0 +1,130 @@
+
+body{
+  font-family: "Outfit", sans-serif !important;
+  background-color: #fcfcfc;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.container{
+  flex:1;
+}
+.card-text title {
+  font-family: "Outfit", sans-serif !important;
+  font-optical-sizing: auto;
+  font-weight: 400 !important; /* Semi-bold weight for modern luxury styling */
+  font-style: normal;
+  color: #1a1a1a;
+  font-size: 1.1rem;
+  
+}
+/* NavBar */
+.navbar {
+    height: 5rem;
+    background-color: white;
+}
+
+.fa-plane-departure {
+    color: #fe424d;
+    font-size: 2rem;
+}
+.navbar-brand{
+  
+}
+
+.nav-link {
+    color: #222222 !important;
+}
+
+/* footer */
+.f-info-links a {
+  text-decoration: none;  
+  color: #222222;
+}
+
+.f-info-links a:hover {
+  text-decoration: underline;
+}
+
+.f-info-links,
+.f-info-socials, 
+.f-info-brand {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.f-info-socials i {
+  font-size: 1.5rem;
+  margin-right: 1rem;
+}
+
+.f-info {
+  text-align: center;
+  height: 8rem;
+  background-color: #ebebeb;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: space-evenly;
+}
+/* Cards */
+
+.card{
+  border : none !important;
+  margin-bottom: 2rem ;
+  
+  
+}
+.card-img-top {
+  border-radius: 1rem !important ;
+  width: 100%;
+  object-fit: cover !important; 
+}
+.card-body{
+  padding: 0 !important;
+}
+.listing-link{
+  text-decoration: none ;
+}
+
+/* card-overlay */
+
+.card-img-overlay{
+  opacity: 0;
+}
+.card-img-overlay:hover{
+  opacity: 0.2;
+  background-color: #ebebeb;
+}
+/* Show page */
+/* Custom Show Page Image Constraints */
+.show-img {
+    height: 30rem !important; /* Perfect luxury scale portrait/landscape frame aspect */
+    width: 100%;
+    object-fit: cover !important;
+    border-radius: 1rem !important;
+}
+
+/* Structural Detail Card Trimming */
+.show-card {
+    border: none !important;
+    background-color: transparent !important;
+}
+
+/* Typography Enhancements for Content Reads */
+.description-text {
+    font-size: 1.1rem;
+    color: #333333;
+    line-height: 1.6;
+}
+
+.price-text {
+    font-size: 1.25rem;
+    color: #1a1a1a;
+}
+
+.location-text {
+    font-size: 1rem;
+    font-weight: 300;
+}
