@@ -6,7 +6,8 @@
             
             <div class="card show-card">
                 <!-- Custom responsive show-img class handles framing -->
-                <img src="<%= listing.image.url %>" class="card-img-top show-img" alt="listing_image">
+                <% const imgSrc = (listing && listing.image && listing.image.url) ? listing.image.url : (typeof listing.image === 'string' ? listing.image : ''); %>
+                <img src="<%= imgSrc %>" class="card-img-top show-img" alt="listing_image">
                 
                 <div class="card-body px-0">
                     <p class="card-text mt-2 mb-1 text-muted">
@@ -17,24 +18,26 @@
                         <%= listing.description %>
                     </p>
                     
-                    <p class="card-text price-text mb-1">
-                        <b>₹<%= listing.price.toLocaleString("en-IN") %></b> / night
-                    </p>
-                    
-                    <p class="card-text location-text text-muted">
-                        <i class="fa-solid fa-location-dot me-2"></i><%= listing.location %>, <%= listing.country %>
-                    </p>
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <p class="card-text price-text mb-1">
+                                <b>₹<%= listing.price.toLocaleString("en-IN") %></b> / night
+                            </p>
+                            <p class="card-text location-text text-muted mb-0">
+                                <i class="fa-solid fa-location-dot me-2"></i><%= listing.location %>, <%= listing.country %>
+                            </p>
+                        </div>
+
+                        <div class="d-flex gap-2 align-items-start">
+                            <a href="/listings/<%=listing._id%>/edit" class="btn btn-dark btn-sm">Edit</a>
+                            <form method="POST" action="/listings/<%=listing._id%>?_method=DELETE" class="d-inline">
+                                <button class="btn btn-outline-danger btn-sm">Delete</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            <!-- Modern, clean inline operational actions -->
-            <div class="btns mt-3 d-flex gap-3">
-                <a href="/listings/<%=listing._id%>/edit" class="btn btn-dark px-4">Edit</a>
-                
-                <form method="POST" action="/listings/<%=listing._id%>?_method=DELETE" class="d-inline">
-                    <button class="btn btn-outline-danger px-4">Delete</button>
-                </form>
-            </div>
+            
         </div>
     </div>
 </body>

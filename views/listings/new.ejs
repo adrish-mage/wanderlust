@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-8 offset-2">
                 <h3>Create a new listing</h3>
-                <form method="POST" action="/listings">
+                <form method="POST" action="/listings" novalidate class="needs-validation">
                     <div class="mb-3">
                         <label for="title" class="form-label">Title</label>
                         <input 
@@ -13,8 +13,12 @@
                             placeholder="Enter the perfect headline" 
                             type="text"
                             class="form-control"
+                            required
                         />
+                        <div class="valid-feedback">Perfection</div>  
+                        <div class="invalid-feedback">Please enter a title.</div>  
                     </div>
+                    
 
                     
                     <div class="mb-3">
@@ -22,18 +26,23 @@
                             name="listing[description]"
                             class="form-control"
                             placeholder="Hit the slopes in style with this luxurious ski chalet in the world-famous Aspen ski resort."
+                            required
                         ></textarea>
+                        <div class="valid-feedback">Aptly described it.</div>  
+                        <div class="invalid-feedback">Please write something about it.</div> 
                     </div>
                     
                     <div class="mb-3">
                         <label for="image" class="form-label">Image Link</label>
                         <input 
                             id="image"
-                            name="listing[image]" 
+                            name="listing[image][url]" 
                             placeholder="enter image URL/Link" 
                             type="text" 
                             class="form-control"
                         />
+                        <div class="valid-feedback">Looks beautiful.</div>
+                        <div class="invalid-feedback">Can't see your amazing property!</div>
                     </div>
 
                     <div class="mb-3">
@@ -44,7 +53,10 @@
                             placeholder="&#8377;20,000" 
                             type="number"
                             class="form-control"
+                            required
                         >
+                        <div class="valid-feedback">Absolutely worth it.</div>
+                        <div class="invalid-feedback">How much? </div>
                     </div>
                     
                     <div class="row">
@@ -56,7 +68,10 @@
                             placeholder="London" 
                             type="text"
                             class="form-control"
+                            required
                         >
+                        <div class="valid-feedback">Lovely Spot. </div>
+                        <div class="invalid-feedback">Please disclose the Location.</div>
                     </div>
                     
                     
@@ -68,7 +83,10 @@
                             placeholder="United Kingdom" 
                             type="text"
                             class="form-control"
+                            required
                         >
+                        <div class="valid-feedback">Sounds Good.</div>
+                        <div class="invalid-feedback">Which country is it?</div>
                     </div>
                     </div>
                     

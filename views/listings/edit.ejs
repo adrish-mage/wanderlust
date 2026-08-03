@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-8 offset-2">
             <h3>Edit this listing</h3>
-            <form method="POST" action="/listings/<%= listing._id %>?_method=PUT">
+            <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" novalidate class="needs-validation">
                 <div class="mb-3">
                     <label for="title" class="form-label">Title</label>
                     <input 
@@ -12,14 +12,21 @@
                         value="<%= listing.title %>" 
                         type="text"
                         class="form-control"
+                        required
                     />
+                    <div class="valid-feedback">Perfection</div>
+                    <div class="invalid-feedback">Please enter a title.</div>
                 </div>
 
                 <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
                     <textarea
                         name="listing[description]"
                         class="form-control"
+                        required
                     ><%= listing.description %></textarea>
+                    <div class="valid-feedback">Aptly described it.</div>
+                    <div class="invalid-feedback">Please write something about it.</div>
                 </div>
                 
                 <div class="mb-3">
@@ -30,8 +37,24 @@
                         value="<%= listing.price %>" 
                         type="number"
                         class="form-control"
+                        required
                     >
+                    <div class="valid-feedback">Absolutely worth it.</div>
+                    <div class="invalid-feedback">How much?</div>
                 </div>
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Image Link</label>
+                        <input 
+                            id="image"
+                            name="listing[image][url]" 
+                            value="<%= listing.image.url %>" 
+                            type="text" 
+                            class="form-control"
+                            required
+                        />
+                        <div class="valid-feedback">Looks beautiful.</div>
+                        <div class="invalid-feedback">Can't see your amazing property!</div>
+                    </div>
                 
                 <div class="row">
                     <div class="mb-3 col-md-6">
@@ -42,6 +65,7 @@
                             value="<%= listing.location %>" 
                             type="text"
                             class="form-control"
+                            required
                         >
                     </div>
                     
@@ -53,6 +77,7 @@
                             value="<%= listing.country %>" 
                             type="text"
                             class="form-control"
+                            required
                         >
                     </div>
                 </div>
