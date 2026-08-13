@@ -1,43 +1,113 @@
 <% layout('layouts/boilerplate') -%>
-<body>
-    <div class="row mt-3">
-        <div class="col-8 offset-2">
-            <h3 class="mb-3"><%= listing.title %></h3>
-            
-            <div class="card show-card">
-                <!-- Custom responsive show-img class handles framing -->
-                <% const imgSrc = (listing && listing.image && listing.image.url) ? listing.image.url : (typeof listing.image === 'string' ? listing.image : ''); %>
-                <img src="<%= imgSrc %>" class="card-img-top show-img" alt="listing_image">
-                
-                <div class="card-body px-0">
-                    <p class="card-text mt-2 mb-1 text-muted">
-                        <i>Owned by Anonymous</i> <!-- Optional placeholder tag -->
-                    </p>
-                    
-                    <p class="card-text description-text mb-3">
-                        <%= listing.description %>
-                    </p>
-                    
-                    <div class="d-flex justify-content-between align-items-start">
-                        <div>
-                            <p class="card-text price-text mb-1">
-                                <b>₹<%= listing.price.toLocaleString("en-IN") %></b> / night
-                            </p>
-                            <p class="card-text location-text text-muted mb-0">
-                                <i class="fa-solid fa-location-dot me-2"></i><%= listing.location %>, <%= listing.country %>
-                            </p>
-                        </div>
 
-                        <div class="d-flex gap-2 align-items-start">
-                            <a href="/listings/<%=listing._id%>/edit" class="btn btn-dark btn-sm">Edit</a>
-                            <form method="POST" action="/listings/<%=listing._id%>?_method=DELETE" class="d-inline">
-                                <button class="btn btn-outline-danger btn-sm">Delete</button>
-                            </form>
+    <body>
+        <div class="row mt-3">
+            <div class="col-8 offset-2">
+                <h3 class="mb-3">
+                    <%= listing.title %>
+                </h3>
+
+                <div class="card show-card">
+                    <!-- Custom responsive show-img class handles framing -->
+                    <% const imgSrc=(listing && listing.image && listing.image.url) ? listing.image.url : (typeof
+                        listing.image==='string' ? listing.image : '' ); %>
+                        <img src="<%= imgSrc %>" class="card-img-top show-img" alt="listing_image">
+
+                        <div class="card-body px-0">
+                            <p class="card-text mt-2 mb-1 text-muted">
+                                <i>Owned by Anonymous</i> <!-- Optional placeholder tag -->
+                            </p>
+
+                            <p class="card-text description-text mb-3">
+                                <%= listing.description %>
+                            </p>
+
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <p class="card-text price-text mb-1">
+                                        <b>₹<%= listing.price.toLocaleString("en-IN") %></b> / night
+                                    </p>
+                                    <p class="card-text location-text text-muted mb-0">
+                                        <i class="fa-solid fa-location-dot me-2"></i>
+                                        <%= listing.location %>, <%= listing.country %>
+                                    </p>
+                                </div>
+
+                                <div class="d-flex gap-2 align-items-start">
+                                    <a href="/listings/<%=listing._id%>/edit" class="btn btn-dark btn-sm">Edit</a>
+                                    <form method="POST" action="/listings/<%=listing._id%>?_method=DELETE"
+                                        class="d-inline">
+                                        <button class="btn btn-outline-danger btn-sm">Delete</button>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                        <hr>
+                        <div class="col-10 offset-1 mb-4 mt-4 review-section">
+                            <div class="submission-card card p-3 mb-4">
+                                <div class="card-body">
+                                    <h4 class="mb-3">Leave a Review</h4>
+                                    <form action="/listings/<%=listing._id%>/reviews" method="POST" class="needs-validation" novalidate>
+                                        <input type="hidden" name="review[rating]" id="reviewRating" value="3">
+                                        <div class="d-flex align-items-center mb-3">
+                                            <label class="me-3 mb-0 fw-semibold">Rating</label>
+                                            <div id="starControl" class="star-control">
+                                                <% for (let i = 1; i <= 5; i++) { %>
+                                                    <i class="fa-regular fa-star star" data-value="<%= i %>"></i>
+                                                <% } %>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="comment" class="form-label">Comments</label>
+                                            <textarea class="form-control" name="review[comment]" id="comment" rows="4" placeholder="Share your experience" required></textarea>
+                                            <div class="invalid-feedback">Please submit some feedback!</div>
+                                        </div>
+                                        <div class="d-flex justify-content-end">
+                                            <button class="btn btn-primary" type="submit">Submit Review</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <p><b>All Reviews</b> (<%= listing.reviews ? listing.reviews.length : 0 %>)</p>
+                            <div class="row g-4">
+                                <% if (listing.reviews && listing.reviews.length) { %>
+                                    <% for (const review of listing.reviews) { %>
+                                        <div class="col-12 col-sm-6 mb-3">
+                                            <div class="card review-card h-100 shadow-sm">
+                                                <div class="card-body">
+                                                    <div class="d-flex align-items-start mb-2">
+                                                        <i class="fa-solid fa-user-circle fa-2x text-secondary me-3"></i>
+                                                        <div>
+                                                            <h6 class="reviewer-name mb-0">Anonymous</h6>
+                                                            <small class="review-date text-muted"><%= new Date(review.createdAt).toLocaleDateString() %></small>
+                                                        </div>
+                                                        <div class="ms-auto review-stars">
+                                                            <% for (let i = 1; i <= 5; i++) { %>
+                                                                <i class="<%= i <= review.rating ? 'fa-solid fa-star text-warning' : 'fa-regular fa-star text-muted' %>"></i>
+                                                            <% } %>
+                                                        </div>
+                                                    </div>
+                                                    <p class="review-comment mb-0"><%= review.comment %></p>
+                                                    <form class="mb-3" method="POST" action="/listings/<%=listing._id%>/reviews/<%=review._id%>?_method=DELETE">
+                                                        <button class="btn btn-dark" >Delete</button>
+                                                    </form>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <% } %>
+                                <% } else { %>
+                                    <div class="col-12"><p>No reviews yet.</p></div>
+                                <% } %>
+                            </div>
+                            
+                           
+                            
+                            
+                        </div>
                 </div>
+
             </div>
-            
         </div>
-    </div>
-</body>
+        
+    </body>
