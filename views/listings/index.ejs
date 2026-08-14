@@ -1,27 +1,30 @@
 <% layout('layouts/boilerplate') -%>
+        <body>
+            <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
+                <% for(let listing of allListings) { %>
+                    <a href="listings/<%=listing._id%>" class="listing-link">
+                        <div class="card col listing-card">
+                            <% const imgSrc=(listing && listing.image && listing.image.url) ? listing.image.url :
+                                (typeof listing.image==='string' ? listing.image : '' ); %>
+                                <img src="<%=imgSrc %>" class="card-img-top" alt="listing-image"
+                                    style="height: 20rem;" />
+                                <div class="card-img-overlay"></div>
+                                <div class="card-body">
+                                    <p class="card-text title">
+                                        <b>
+                                            <%= listing.title %>
+                                        </b> <br>
+                                        &#8377;<%= listing.price.toLocaleString("en-IN") %> / night
+                                    </p>
 
-    <body>
-        <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
-            <% for(let listing of allListings) { %>
-                <a href="listings/<%=listing._id%>" class="listing-link">
-                    <div class="card col listing-card" >
-                        <% const imgSrc = (listing && listing.image && listing.image.url) ? listing.image.url : (typeof listing.image === 'string' ? listing.image : ''); %>
-                        <img src="<%=imgSrc %>" class="card-img-top" alt="listing-image" style="height: 20rem;"/>
-                        <div class="card-img-overlay"></div>
-                        <div class="card-body">
-                            <p class="card-text title">
-                                <b><%= listing.title %></b> <br>
-                                &#8377;<%= listing.price.toLocaleString("en-IN") %> / night
-                            </p>
-                            
-                                
-                            
+
+
+                                </div>
                         </div>
-                    </div>
-                </a>
-                
-                <% } %>
-        </div>
+                    </a>
+
+                    <% } %>
+            </div>
 
 
-    </body>
+        </body>

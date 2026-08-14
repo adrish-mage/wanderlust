@@ -5,14 +5,15 @@ const wrapAsync = require('../utils/wrapAsync.js');
 const Listing = require("../models/listing.js");
 const { ListingSchema } = require("../schemaValidator.js");
 
-const validateListing = ((req, res, next) => {
+const validateListing = (req, res, next) => {
     const { error } = ListingSchema.validate(req.body);
+
     if (error) {
-        throw new ExpressError(400, result.error);
+        throw new ExpressError(400, error.details[0].message);
     } else {
         next();
     }
-})
+};
 
 // Index Route
 router.get("/", async (req, res) => {
@@ -53,13 +54,18 @@ router.post("/", validateListing, wrapAsync(async (req, res, next) => {
     }
     const newListing = new Listing(req.body.listing);
     await newListing.save();
+    req.flash("success","New Listing Added");
     res.redirect("/listings");
-})
-)
+}))
 // Delete Route
 router.delete("/:id", async (req, res) => {
     let { id } = req.params;
+    const listing = await Listing.findById(id);
+    const name = listing.title;
+
     await Listing.findByIdAndDelete(id);
+
+    req.flash("error", `${name} is deleted successfully`);
     res.redirect("/listings");
 })
 

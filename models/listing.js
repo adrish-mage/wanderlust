@@ -6,7 +6,7 @@ const listingSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    description: String,
+    description: String,    
     image: {
         filename: {
             type: String,
