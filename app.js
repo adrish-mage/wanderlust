@@ -14,8 +14,9 @@ const passport = require("passport");
 const localStrategy = require("passport-local");
 const User = require("./models/user.js");
 
-const listings = require("./routes/listings.js");
-const review = require("./routes/review.js");
+const listingsRouter = require("./routes/listings.js");
+const reviewRouter = require("./routes/review.js");
+const userRouter = require("./routes/user.js");
 
 const port = 8080;
 
@@ -75,7 +76,7 @@ app.use((req, res, next) => {
 // authentication
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(new localStrategy(User.authenticate));
+passport.use(new localStrategy(User.authenticate()));
 
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
@@ -85,8 +86,19 @@ app.get("/", (req, res) => {
     res.send("hi i am root");
 });
 
-app.use("/listings", listings);
-app.use("/listings/:id/reviews", review);
+app.get("/demoUser", async (req, res) => {
+    let fakeUser = new User({
+        email: "sample123@gmail.com",
+        username: "tony stark",
+
+    })
+    const registeredUser = await User.register(fakeUser, "passssworrd");
+    res.send(registeredUser);
+})
+
+app.use("/listings", listingsRouter);
+app.use("/listings/:id/reviews", reviewRouter);
+app.use("/", userRouter);
 
 // 404
 app.all("/{*splat}", (req, res, next) => {

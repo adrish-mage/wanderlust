@@ -12,20 +12,23 @@
     <title>WanderLust</title>
 </head>
 <body>
-    <%- include("../includes/navbar.ejs") %>
-    <% if (success && success.length) { %>
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <%= success[0] %>
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-    <% } %>
+        <%- include("../includes/navbar.ejs") %>
+        <div class="container mt-3">
+            <% if (success && success.length) { %>
+                <div class="alert alert-success alert-dismissible fade show w-50 mx-auto" role="alert">
+                    <%= success[0] %>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            <% } %>
 
-    <% if (error && error.length) { %>
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <%= error[0] %>
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <% if (error && error.length) { %>
+                <div class="alert alert-danger alert-dismissible fade show w-50 mx-auto" role="alert">
+                    <%= error[0] %>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            <% } %>
         </div>
-    <% } %>
+
     <div class = "container"><%-body%></div>
     
     <%- include("../includes/footer.ejs") %>
