@@ -32,8 +32,7 @@
                                         <%= listing.location %>, <%= listing.country %>
                                     </p>
                                 </div>
-                                <p>Current User: <%= CurrUser?._id %></p>
-                                <p>Listing Owner: <%= listing.owner?._id %></p>
+                                
                                 <%if (CurrUser && CurrUser._id.equals(listing.owner._id)){%>
                                     <div class="d-flex gap-2 align-items-start">
                                         <a href="/listings/<%=listing._id%>/edit" class="btn btn-dark btn-sm">Edit</a>
