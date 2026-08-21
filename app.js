@@ -64,15 +64,11 @@ app.use(session(sessionOptions));
 app.use(flash());
 
 app.use((req, res, next) => {
-    res.locals.success = req.flash("success");
-    res.locals.delete = req.flash("delete");
-    res.locals.error = req.flash("error");
-
-    console.log("SUCCESS:", res.locals.success);
-    console.log("DELETE:", res.locals.delete);
-
+    console.log("SESSION:", req.session);
+    console.log("FLASH:", req.session.flash);
     next();
 });
+
 // authentication
 app.use(passport.initialize());
 app.use(passport.session());
@@ -80,6 +76,14 @@ passport.use(new localStrategy(User.authenticate()));
 
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
+app.use((req, res, next) => {
+    res.locals.success = req.flash("success");
+    res.locals.delete = req.flash("delete");
+    res.locals.error = req.flash("error");
+    res.locals.CurrUser = req.user;
+    next();
+});
 
 // Routes
 app.get("/", (req, res) => {
@@ -91,10 +95,11 @@ app.get("/demoUser", async (req, res) => {
         email: "sample123@gmail.com",
         username: "tony stark",
 
-    })
+    });
+
     const registeredUser = await User.register(fakeUser, "passssworrd");
     res.send(registeredUser);
-})
+});
 
 app.use("/listings", listingsRouter);
 app.use("/listings/:id/reviews", reviewRouter);
