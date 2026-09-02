@@ -9,6 +9,8 @@ const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/expressError.js");
+const homeController = require("./controllers/home.js");
+const userController = require("./controllers/user.js");
 
 const passport = require("passport");
 const localStrategy = require("passport-local");
@@ -63,12 +65,6 @@ const sessionOptions = {
 app.use(session(sessionOptions));
 app.use(flash());
 
-app.use((req, res, next) => {
-    console.log("SESSION:", req.session);
-    console.log("FLASH:", req.session.flash);
-    next();
-});
-
 // authentication
 app.use(passport.initialize());
 app.use(passport.session());
@@ -86,20 +82,8 @@ app.use((req, res, next) => {
 });
 
 // Routes
-app.get("/", (req, res) => {
-    res.send("hi i am root");
-});
-
-app.get("/demoUser", async (req, res) => {
-    let fakeUser = new User({
-        email: "sample123@gmail.com",
-        username: "tony stark",
-
-    });
-
-    const registeredUser = await User.register(fakeUser, "passssworrd");
-    res.send(registeredUser);
-});
+app.get("/", homeController.index);
+app.get("/demoUser", userController.demoUser);
 
 app.use("/listings", listingsRouter);
 app.use("/listings/:id/reviews", reviewRouter);

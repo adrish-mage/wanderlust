@@ -21,11 +21,14 @@ module.exports.saveRedirectUrl = (req, res, next) => {
 module.exports.isOwner = async (req, res, next) => {
     let { id } = req.params;
     const listing = await Listing.findById(id);
+    if (!listing) {
+        throw new ExpressError(404, "Listing not found");
+    }
     if (!listing.owner.equals(res.locals.CurrUser._id)) {
         req.flash("error", "You are not the owner of this listing");
         return res.redirect(`/listings/${id}`);
     }
-    res.render("listings/edit.ejs", { listing });
+    req.listing = listing;
     next();
 }
 
