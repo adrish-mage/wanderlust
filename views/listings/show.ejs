@@ -1,9 +1,10 @@
 <% layout('layouts/boilerplate') -%>
 
     <body>
-        <div class="row mt-3">
+        <div class="row mt-3 detail-page">
             <div class="col-8 offset-2">
-                <h3 class="mb-3">
+                <p class="eyebrow mb-2">A WANDERLUST STAY</p>
+                <h1 class="detail-title mb-3">
                     <%= listing.title %>
                 </h3>
 
@@ -14,7 +15,7 @@
                         <img src="<%= imgSrc %>" class="card-img-top show-img" alt="listing_image">
 
                         <div class="card-body px-0">
-                            <p class="card-text mt-2 mb-1 text-muted">
+                            <p class="card-text owner-line mt-3 mb-2 text-muted">
                                 <i>Owned by <%=listing.owner.username%></i> <!-- Optional placeholder tag -->
                             </p>
 
@@ -72,7 +73,7 @@
                                     </div>
                                 </div>
                             <% } %>
-                            <p><b>All Reviews</b> (<%= listing.reviews ? listing.reviews.length : 0 %>)</p>
+                            <div class="reviews-heading"><p class="mb-0"><b>Guest notes</b> <span>(<%= listing.reviews ? listing.reviews.length : 0 %>)</span></p></div>
                             <div class="row g-4">
                                 <% if (listing.reviews && listing.reviews.length) { %>
                                     <% for (const review of listing.reviews) { %>

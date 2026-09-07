@@ -1,9 +1,11 @@
 <% layout('layouts/boilerplate') -%>
 <body>
-    <div class="row">
+    <div class="row form-page">
         <div class="col-8 offset-2">
-            <h3>Edit this listing</h3>
-            <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" novalidate class="needs-validation">
+            <p class="eyebrow">REFINE YOUR STAY</p>
+            <h1 class="form-page-title">Edit this listing</h1>
+            <p class="form-page-intro">Keep the details current so guests know what to expect.</p>
+            <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" novalidate class="needs-validation" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="title" class="form-label">Title</label>
                     <input 
@@ -42,19 +44,43 @@
                     <div class="valid-feedback">Absolutely worth it.</div>
                     <div class="invalid-feedback">How much?</div>
                 </div>
-                    <div class="mb-3">
-                        <label for="image" class="form-label">Image Link</label>
-                        <input 
-                            id="image"
-                            name="listing[image][url]" 
-                            value="<%= listing.image.url %>" 
-                            type="text" 
-                            class="form-control"
-                            required
-                        />
-                        <div class="valid-feedback">Looks beautiful.</div>
-                        <div class="invalid-feedback">Can't see your amazing property!</div>
+                <div class="edit-image-section mb-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div>
+                            <p class="edit-section-label mb-1">Listing image</p>
+                            <p class="edit-section-help mb-0">A strong photo helps guests picture the stay.</p>
+                        </div>
+                        <span class="image-status-badge">Current</span>
                     </div>
+
+                    <div class="image-preview-frame">
+                        <img
+                            id="image-preview"
+                            src="<%= origImage %>"
+                            alt="Current listing image"
+                        >
+                        <div class="image-preview-overlay">
+                            <i class="fa-regular fa-image" aria-hidden="true"></i>
+                            <span>Preview</span>
+                        </div>
+                    </div>
+
+                    <div class="image-upload-row mt-3">
+                        <label for="image" class="form-label mb-0">
+                            <span class="d-block fw-semibold">Replace image</span>
+                            <span class="image-upload-help">JPG or PNG, up to 5 MB</span>
+                        </label>
+                        <input
+                            id="image"
+                            name="listing[image]"
+                            type="file"
+                            class="form-control"
+                            accept="image/png, image/jpeg"
+                        />
+                    </div>
+                    <div class="valid-feedback">Looks beautiful.</div>
+                    <div class="invalid-feedback">Can't see your amazing property!</div>
+                </div>
                 
                 <div class="row">
                     <div class="mb-3 col-md-6">
@@ -83,7 +109,7 @@
                 </div>
 
                 <button class="btn btn-dark">Edit</button>
-                <br>
+                
             </form>
             
         </div>

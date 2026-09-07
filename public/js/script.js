@@ -17,3 +17,16 @@
     }, false)
   })
 })()
+
+const imageInput = document.querySelector('#image')
+const imagePreview = document.querySelector('#image-preview')
+
+if (imageInput && imagePreview) {
+  imageInput.addEventListener('change', () => {
+    const [selectedImage] = imageInput.files
+
+    if (selectedImage) {
+      imagePreview.src = URL.createObjectURL(selectedImage)
+    }
+  })
+}

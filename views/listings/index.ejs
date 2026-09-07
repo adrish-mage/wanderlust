@@ -1,24 +1,29 @@
 <% layout('layouts/boilerplate') -%>
         <body>
-            <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
+            <div class="listings-heading">
+                <div>
+                    <p class="eyebrow">THE WANDERLUST EDIT</p>
+                    <h1>Find a place worth remembering.</h1>
+                    <p class="listings-intro">Thoughtful stays for slow mornings, faraway views, and stories you will bring home.</p>
+                </div>
+                <span class="listing-count"><%= allListings.length %> stays</span>
+            </div>
+            <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-4 listings-grid">
                 <% for(let listing of allListings) { %>
                     <a href="listings/<%=listing._id%>" class="listing-link">
-                        <div class="card col listing-card">
+                        <div class="card col listing-card h-100">
                             <% const imgSrc=(listing && listing.image && listing.image.url) ? listing.image.url :
                                 (typeof listing.image==='string' ? listing.image : '' ); %>
-                                <img src="<%=imgSrc %>" class="card-img-top" alt="listing-image"
-                                    style="height: 20rem;" />
-                                <div class="card-img-overlay"></div>
+                                <div class="listing-image-wrap">
+                                    <img src="<%=imgSrc %>" class="card-img-top" alt="listing-image" />
+                                    <span class="listing-image-label">Wanderlust stay</span>
+                                </div>
                                 <div class="card-body">
-                                    <p class="card-text title">
-                                        <b>
-                                            <%= listing.title %>
-                                        </b> <br>
-                                        &#8377;<%= listing.price.toLocaleString("en-IN") %> / night
-                                    </p>
-
-
-
+                                    <div class="d-flex justify-content-between gap-3 align-items-start">
+                                        <p class="card-text title mb-1"><b><%= listing.title %></b></p>
+                                        <span class="listing-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+                                    </div>
+                                    <p class="listing-price mb-0">&#8377;<%= listing.price.toLocaleString("en-IN") %> <span>/ night</span></p>
                                 </div>
                         </div>
                     </a>

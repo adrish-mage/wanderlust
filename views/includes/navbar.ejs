@@ -1,18 +1,19 @@
-<nav class="navbar navbar-expand-md bg-body-light sticky-top">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/"><i class="fa-solid fa-plane-departure"></i> Wanderlust</a>
+<nav class="navbar navbar-expand-md sticky-top site-navbar">
+  <div class="container">
+    <a class="navbar-brand site-brand" href="/">
+      <span class="brand-mark"><i class="fa-solid fa-plane-departure"></i></span>
+      <span>Wanderlust</span>
+    </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" >
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        
-        <a class="nav-link" href="#">Home</a>
-        <a class="nav-link" href="/listings">All listings</a>
-        <a class="nav-link" href="/listings/new">Add new listing</a>
-        
+      <div class="navbar-nav site-nav-links">
+        <a class="nav-link" href="/">Home</a>
+        <a class="nav-link" href="/listings">Explore stays</a>
+        <a class="nav-link nav-link-accent" href="/listings/new"><i class="fa-solid fa-plus me-1"></i>Add a listing</a>
       </div>
-      <div class="navbar-nav ms-auto">
+      <div class="navbar-nav ms-auto site-account-links">
         <%if (!CurrUser) {%>
         <a class="nav-link" href="/signup">Sign up</a>
         <a class="nav-link" href="/login">Login</a>

@@ -31,7 +31,12 @@ module.exports.renderEditForm = async (req, res) => {
     if (!listing) {
         throw new ExpressError(404, "Listing not found");
     }
-    res.render("listings/edit.ejs", { listing });
+    let origImage = listing.image.url;
+    origImage = origImage.replace(
+        "/upload",
+        "/upload/c_limit,w_1200,q_auto:best,f_auto"
+    );
+    res.render("listings/edit.ejs", { listing, origImage });
 };
 
 module.exports.create = async (req, res) => {
@@ -53,7 +58,15 @@ module.exports.create = async (req, res) => {
 
 module.exports.update = async (req, res) => {
     const { id } = req.params;
-    await Listing.findByIdAndUpdate(id, { ...req.body.listing });
+    const updatedListing = await Listing.findById(id);
+    Object.assign(updatedListing, req.body.listing);
+    if (req.file) {
+        updatedListing.image = {
+            url: req.file.path,
+            filename: req.file.filename
+        };
+    }
+    await updatedListing.save();
     res.redirect(`/listings/${id}`);
 };
 

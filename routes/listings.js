@@ -19,10 +19,22 @@ router.get("/new", isLoggedIn, listingController.renderNewForm);
 router.get("/:id", wrapAsync(listingController.show));
 
 // Edit Route
-router.get("/:id/edit", isLoggedIn, isOwner, wrapAsync(listingController.renderEditForm));
+router.get(
+    "/:id/edit", 
+    isLoggedIn,
+    isOwner,
+    wrapAsync(listingController.renderEditForm)
+);
 
 // Update Route
-router.put("/:id", validateListing, isLoggedIn, isOwner, wrapAsync(listingController.update));
+router.put(
+    "/:id",
+    isLoggedIn,
+    isOwner,
+    upload.single("listing[image]"),
+    validateListing,
+    wrapAsync(listingController.update)
+);
 
 // Create Route
 router.post(

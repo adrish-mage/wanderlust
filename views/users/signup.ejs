@@ -1,8 +1,13 @@
 <% layout('layouts/boilerplate') -%>
 
-<div class="row justify-content-center">
-    <div class="col-6">
-        <h1 class="mb-5">Create your account on Wanderlust</h1>
+<div class="auth-shell">
+    <div class="auth-intro">
+        <p class="eyebrow">JOIN WANDERLUST</p>
+        <h1>Make room for more somewhere.</h1>
+        <p>Create an account to share beautiful stays and plan the ones still waiting for you.</p>
+    </div>
+    <div class="auth-form-panel">
+        <h2>Create your account</h2>
 
         <form action="/signup" method="POST" class="needs-validation" novalidate>
             <div class="mb-3">
@@ -26,7 +31,7 @@
                 <div class="invalid-feedback">Enter a strong password</div>
             </div>
 
-            <button class="btn btn-danger">Create my account</button>
+            <button class="btn btn-dark w-100">Create my account</button>
         </form>
     </div>
 </div>
