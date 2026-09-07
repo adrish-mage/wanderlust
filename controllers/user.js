@@ -45,11 +45,4 @@ module.exports.logout = (req, res, next) => {
     });
 };
 
-module.exports.demoUser = async (req, res) => {
-    const fakeUser = new User({
-        email: "sample123@gmail.com",
-        username: "tony stark"
-    });
-    const registeredUser = await User.register(fakeUser, "passssworrd");
-    res.send(registeredUser);
-};
+

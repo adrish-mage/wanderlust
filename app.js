@@ -84,7 +84,7 @@ app.use((req, res, next) => {
 
 // Routes
 app.get("/", wrapAsync(homeController.index));
-app.get("/demoUser", userController.demoUser);
+
 
 app.use("/listings", listingsRouter);
 app.use("/listings/:id/reviews", reviewRouter);
