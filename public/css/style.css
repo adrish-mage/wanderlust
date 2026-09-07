@@ -303,6 +303,13 @@ body {
   box-shadow: none;
 }
 
+.navbar-search .form-control:focus {
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+  outline: none;
+}
+
 .navbar-search .btn {
   width: 2.65rem;
   height: 2.65rem;
@@ -321,6 +328,11 @@ body {
 .navbar-search .btn:focus {
   background: var(--coral);
   color: #fff;
+}
+
+.navbar-search .btn:focus {
+  box-shadow: none;
+  outline: none;
 }
 
 .eyebrow {
