@@ -839,3 +839,29 @@ textarea.form-control {
   border: 1px solid rgba(0,0,0,0.06);
   background-color: #ffffff;
 }
+
+
+/* Filters bar */
+
+.filters{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    flex-wrap: wrap;
+}
+.filter{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    opacity: 0.8;
+    transition: opacity 0.1s ease-in ;
+}
+.filter:hover{
+    opacity: 1;
+    cursor: pointer;
+}
+.filter-icon{
+    scale: 1.5;
+}
+    

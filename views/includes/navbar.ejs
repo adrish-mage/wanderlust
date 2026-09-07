@@ -13,6 +13,12 @@
         <a class="nav-link" href="/listings">Explore stays</a>
         <a class="nav-link nav-link-accent" href="/listings/new"><i class="fa-solid fa-plus me-1"></i>Add a listing</a>
       </div>
+      <form class="navbar-nav d-flex ms-auto" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+        <button class="btn btn-outline-success" type="submit">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </form>
       <div class="navbar-nav ms-auto site-account-links">
         <%if (!CurrUser) {%>
         <a class="nav-link" href="/signup">Sign up</a>

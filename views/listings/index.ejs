@@ -8,6 +8,42 @@
                 </div>
                 <span class="listing-count"><%= allListings.length %> stays</span>
             </div>
+            <div class="filters">
+                <div class="filter">
+                    <i class="fa-solid fa-arrow-trend-up filter-icon"></i>
+                    <p>Trending</p>
+                </div>
+                <div class="filter">
+                    <i class="fa-solid fa-ranking-star"></i>
+                    <p>Best</p>
+                </div>  
+                <div class="filter">
+                    <i class="fa-solid fa-coins"></i>
+                    <p>Thrifty</p>
+                </div>
+                <div class="filter">
+                    <i class="fa-solid fa-mountain"></i>
+                    <p>Mountains </p>
+                </div>
+                <div class="filter">
+                    <i class="fa-solid fa-umbrella-beach"></i>
+                    <p>Beachs</p>
+                </div>
+                <div class="filter">
+                    <i class="fa-solid fa-panorama"></i>
+                    <p>Views</p>
+                </div>
+                <div class="filter">
+                    <i class="fa-solid fa-archway"></i>
+                    <p>Iconic Cities</p>
+                </div>
+                <div class="filter">
+                    <i class="fa-solid fa-hotel"></i>
+                    <p>Apartments </p>
+                </div>
+                                  
+                
+            </div>
             <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-4 listings-grid">
                 <% for(let listing of allListings) { %>
                     <a href="listings/<%=listing._id%>" class="listing-link">
