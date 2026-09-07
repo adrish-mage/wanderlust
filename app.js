@@ -9,6 +9,7 @@ const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/expressError.js");
+const wrapAsync = require("./utils/wrapAsync.js");
 const homeController = require("./controllers/home.js");
 const userController = require("./controllers/user.js");
 
@@ -82,7 +83,7 @@ app.use((req, res, next) => {
 });
 
 // Routes
-app.get("/", homeController.index);
+app.get("/", wrapAsync(homeController.index));
 app.get("/demoUser", userController.demoUser);
 
 app.use("/listings", listingsRouter);

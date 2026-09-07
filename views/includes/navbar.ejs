@@ -13,8 +13,8 @@
         <a class="nav-link" href="/listings">Explore stays</a>
         <a class="nav-link nav-link-accent" href="/listings/new"><i class="fa-solid fa-plus me-1"></i>Add a listing</a>
       </div>
-      <form class="navbar-nav d-flex ms-auto" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+      <form class="navbar-nav d-flex ms-auto navbar-search" role="search" action="/listings" method="GET">
+        <input class="form-control me-2" type="search" name="q" value="<%= typeof search !== 'undefined' ? search : '' %>" placeholder="Search stays" aria-label="Search stays"/>
         <button class="btn btn-outline-success" type="submit">
             <i class="fa-solid fa-magnifying-glass"></i>
         </button>

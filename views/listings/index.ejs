@@ -3,50 +3,57 @@
             <div class="listings-heading">
                 <div>
                     <p class="eyebrow">THE WANDERLUST EDIT</p>
-                    <h1>Find a place worth remembering.</h1>
-                    <p class="listings-intro">Thoughtful stays for slow mornings, faraway views, and stories you will bring home.</p>
+                    <h1><%= search ? 'Stays for "' + search + '"' : "Find a place worth remembering." %></h1>
+                    <p class="listings-intro"><%= search ? "Showing stays that match your search." : "Thoughtful stays for slow mornings, faraway views, and stories you will bring home." %></p>
                 </div>
                 <span class="listing-count"><%= allListings.length %> stays</span>
             </div>
             <div class="filters">
-                <div class="filter">
+                <a class="filter <%= !search ? 'filter-active' : '' %>" href="/listings">
                     <i class="fa-solid fa-arrow-trend-up filter-icon"></i>
-                    <p>Trending</p>
-                </div>
-                <div class="filter">
-                    <i class="fa-solid fa-ranking-star"></i>
-                    <p>Best</p>
-                </div>  
-                <div class="filter">
-                    <i class="fa-solid fa-coins"></i>
-                    <p>Thrifty</p>
-                </div>
-                <div class="filter">
-                    <i class="fa-solid fa-mountain"></i>
-                    <p>Mountains </p>
-                </div>
-                <div class="filter">
+                    <p>All stays</p>
+                </a>
+                <a class="filter <%= search === 'beach' ? 'filter-active' : '' %>" href="/listings?q=beach">
                     <i class="fa-solid fa-umbrella-beach"></i>
-                    <p>Beachs</p>
-                </div>
-                <div class="filter">
-                    <i class="fa-solid fa-panorama"></i>
-                    <p>Views</p>
-                </div>
-                <div class="filter">
+                    <p>Beach</p>
+                </a>
+                <a class="filter <%= search === 'mountain' ? 'filter-active' : '' %>" href="/listings?q=mountain">
+                    <i class="fa-solid fa-mountain"></i>
+                    <p>Mountain</p>
+                </a>
+                <a class="filter <%= search === 'cabin' ? 'filter-active' : '' %>" href="/listings?q=cabin">
+                    <i class="fa-solid fa-house"></i>
+                    <p>Cabins</p>
+                </a>
+                <a class="filter <%= search === 'apartment' ? 'filter-active' : '' %>" href="/listings?q=apartment">
+                    <i class="fa-solid fa-building"></i>
+                    <p>Apartments</p>
+                </a>
+                <a class="filter <%= search === 'villa' ? 'filter-active' : '' %>" href="/listings?q=villa">
+                    <i class="fa-solid fa-landmark"></i>
+                    <p>Villas</p>
+                </a>
+                <a class="filter <%= search === 'lake' ? 'filter-active' : '' %>" href="/listings?q=lake">
+                    <i class="fa-solid fa-water"></i>
+                    <p>Lakeside</p>
+                </a>
+                <a class="filter <%= search === 'luxury' ? 'filter-active' : '' %>" href="/listings?q=luxury">
+                    <i class="fa-solid fa-gem"></i>
+                    <p>Luxury</p>
+                </a>
+                <a class="filter <%= search === 'safari' ? 'filter-active' : '' %>" href="/listings?q=safari">
+                    <i class="fa-solid fa-binoculars"></i>
+                    <p>Safari</p>
+                </a>
+                <a class="filter <%= search === 'city' ? 'filter-active' : '' %>" href="/listings?q=city">
                     <i class="fa-solid fa-archway"></i>
-                    <p>Iconic Cities</p>
-                </div>
-                <div class="filter">
-                    <i class="fa-solid fa-hotel"></i>
-                    <p>Apartments </p>
-                </div>
-                                  
-                
+                    <p>City</p>
+                </a>
             </div>
+            <% if (allListings.length) { %>
             <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-4 listings-grid">
                 <% for(let listing of allListings) { %>
-                    <a href="listings/<%=listing._id%>" class="listing-link">
+                    <a href="/listings/<%=listing._id%>" class="listing-link">
                         <div class="card col listing-card h-100">
                             <% const imgSrc=(listing && listing.image && listing.image.url) ? listing.image.url :
                                 (typeof listing.image==='string' ? listing.image : '' ); %>
@@ -66,6 +73,14 @@
 
                     <% } %>
             </div>
+            <% } else { %>
+                <div class="listing-empty">
+                    <i class="fa-solid fa-compass"></i>
+                    <h2>No stays found</h2>
+                    <p>Try a different destination or browse the full collection.</p>
+                    <a class="btn btn-dark" href="/listings">View all stays</a>
+                </div>
+            <% } %>
 
 
         </body>

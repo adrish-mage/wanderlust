@@ -281,6 +281,48 @@ body {
   background: #cbdccf;
 }
 
+.navbar-search {
+  flex-direction: row;
+  align-items: center;
+  width: 20rem;
+  margin-left: auto;
+  margin-right: 1rem;
+  padding: 0.2rem 0.25rem 0.2rem 0.85rem;
+  border: 1px solid rgba(27, 36, 33, 0.16);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.navbar-search .form-control {
+  width: auto;
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  box-shadow: none;
+}
+
+.navbar-search .btn {
+  width: 2.65rem;
+  height: 2.65rem;
+  padding: 0;
+  border-color: var(--coral);
+  border-radius: 50%;
+  color: var(--coral);
+}
+
+.navbar-search:focus-within {
+  border-color: var(--coral);
+  box-shadow: 0 0 0 3px rgba(232, 107, 93, 0.12);
+}
+
+.navbar-search .btn:hover,
+.navbar-search .btn:focus {
+  background: var(--coral);
+  color: #fff;
+}
+
 .eyebrow {
   margin: 0;
   color: var(--coral);
@@ -841,27 +883,51 @@ textarea.form-control {
 }
 
 
-/* Filters bar */
+.filters {
+  display: flex;
+  gap: 0.7rem;
+  margin: 0.5rem 0 2.5rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
 
-.filters{
-    display: flex;
-    flex-direction: row;
-    justify-content:space-between;
-    flex-wrap: wrap;
+.filters::-webkit-scrollbar { display: none; }
+
+.filter {
+  display: inline-flex;
+  min-width: 6.4rem;
+  flex: 0 0 auto;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 0.8rem;
+  background: transparent;
+  color: var(--muted-ink);
+  text-decoration: none;
+  transition: border-color 160ms ease, background 160ms ease, color 160ms ease, transform 160ms ease;
 }
-.filter{
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-items: center;
-    opacity: 0.8;
-    transition: opacity 0.1s ease-in ;
+
+.filter p { margin: 0; font-size: 0.72rem; font-weight: 600; white-space: nowrap; }
+.filter i { font-size: 1rem; }
+.filter:hover,
+.filter:focus-visible,
+.filter-active { border-color: var(--ink); background: var(--ink); color: #fff; transform: translateY(-2px); }
+
+.listing-empty {
+  margin: 1rem 0 5rem;
+  padding: 5rem 1.5rem;
+  border: 1px dashed var(--line);
+  border-radius: 1rem;
+  text-align: center;
 }
-.filter:hover{
-    opacity: 1;
-    cursor: pointer;
-}
-.filter-icon{
-    scale: 1.5;
+
+.listing-empty > i { margin-bottom: 1rem; color: var(--coral); font-size: 2rem; }
+.listing-empty h2 { margin-bottom: 0.5rem; font-size: 1.8rem; }
+.listing-empty p { margin-bottom: 1.5rem; color: var(--muted-ink); }
+
+@media (max-width: 767px) {
+  .navbar-search { width: 100%; margin: 0.75rem 0; }
 }
     
