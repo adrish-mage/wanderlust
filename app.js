@@ -20,7 +20,7 @@ const listingsRouter = require("./routes/listings.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
 
-const port = 8080;
+const port = process.env.PORT || 8080;
 
 // MongoDB
 async function main() {
@@ -52,7 +52,7 @@ app.use(express.static(path.join(__dirname, "/public")));
 
 // Session
 const sessionOptions = {
-    secret: "geraltofrivia",
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: {
