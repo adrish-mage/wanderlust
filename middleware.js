@@ -33,7 +33,9 @@ module.exports.isOwner = async (req, res, next) => {
 }
 
 module.exports.validateListing = (req, res, next) => {
-    const { error } = ListingSchema.validate(req.body);
+    const listingData = { ...req.body };
+    delete listingData._csrf;
+    const { error } = ListingSchema.validate(listingData);
 
     if (error) {
         throw new ExpressError(400, error.details[0].message);
@@ -42,7 +44,9 @@ module.exports.validateListing = (req, res, next) => {
     }
 };
 module.exports.validateReview = ((req, res, next) => {
-    const { error } = ReviewSchema.validate(req.body);
+    const reviewData = { ...req.body };
+    delete reviewData._csrf;
+    const { error } = ReviewSchema.validate(reviewData);
     if (error) {
         let errMsg = error.details.map((el) => el.message).join(",");
         throw new ExpressError(400, errMsg);
