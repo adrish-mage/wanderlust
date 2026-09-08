@@ -9,6 +9,7 @@
         <div class="auth-form-panel">
             <h2>Log in</h2>
             <form action="/login" method="POST" class="needs-validation" novalidate>
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
                     <input 

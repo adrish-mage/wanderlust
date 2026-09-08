@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const session = require("express-session");
 const flash = require("connect-flash");
+const cookieParser = require("cookie-parser");
 require("dotenv").config();
 
 const mongoose = require("mongoose");
@@ -11,7 +12,6 @@ const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/expressError.js");
 const wrapAsync = require("./utils/wrapAsync.js");
 const homeController = require("./controllers/home.js");
-const userController = require("./controllers/user.js");
 
 const passport = require("passport");
 const localStrategy = require("passport-local");
@@ -20,6 +20,10 @@ const User = require("./models/user.js");
 const listingsRouter = require("./routes/listings.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
+const {
+    generateCsrfToken,
+    invalidCsrfTokenError
+} = require("./utils/csrf.js");
 
 const port = process.env.PORT || 8080;
 
@@ -57,7 +61,6 @@ const sessionOptions = {
     resave: false,
     saveUninitialized: true,
     cookie: {
-        expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
         maxAge: 7 * 24 * 60 * 60 * 1000,
         httpOnly: true
     }
@@ -65,6 +68,11 @@ const sessionOptions = {
 
 app.use(session(sessionOptions));
 app.use(flash());
+app.use(cookieParser());
+app.use((req, res, next) => {
+    res.locals.csrfToken = generateCsrfToken(req, res);
+    next();
+});
 
 // authentication
 app.use(passport.initialize());
@@ -79,6 +87,7 @@ app.use((req, res, next) => {
     res.locals.delete = req.flash("delete");
     res.locals.error = req.flash("error");
     res.locals.CurrUser = req.user;
+    res.locals.currentPath = req.path;
     next();
 });
 
@@ -97,6 +106,11 @@ app.all("/{*splat}", (req, res, next) => {
 
 // Error handler
 app.use((err, req, res, next) => {
+    if (err === invalidCsrfTokenError || err.code === "EBADCSRFTOKEN") {
+        req.flash("error", "Invalid CSRF token. Please try again.");
+        return res.redirect(req.get("Referrer") || "/listings");
+    }
+
     const {
         statusCode = 500,
         message = "something went wrong"

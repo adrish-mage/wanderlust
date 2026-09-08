@@ -8,6 +8,7 @@ const upload = multer({ storage });
 
 const { isLoggedIn, isOwner, validateListing } = require("../middleware.js");
 const listingController = require("../controllers/listings.js");
+const { doubleCsrfProtection } = require("../utils/csrf.js");
 
 // Index Route
 router.get("/", wrapAsync(listingController.index));
@@ -32,6 +33,7 @@ router.put(
     isLoggedIn,
     isOwner,
     upload.single("listing[image]"),
+    doubleCsrfProtection,
     validateListing,
     wrapAsync(listingController.update)
 );
@@ -41,12 +43,13 @@ router.post(
     "/",
     isLoggedIn,
     upload.single("listing[image]"),
+    doubleCsrfProtection,
     validateListing,
     wrapAsync(listingController.create)
 );
 
 // Delete Route
-router.delete("/:id", isLoggedIn, isOwner, wrapAsync(listingController.destroy));
+router.delete("/:id", isLoggedIn, isOwner, doubleCsrfProtection, wrapAsync(listingController.destroy));
 
 
 module.exports = router;

@@ -7,6 +7,7 @@
             <h1 class="form-page-title">Create a new listing</h1>
             <p class="form-page-intro">Give future guests a reason to pack their bags.</p>
                 <form method="POST" action="/listings" novalidate class="needs-validation" enctype="multipart/form-data">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                     <div class="mb-3">
                         <label for="title" class="form-label">Title</label>
                         <input 

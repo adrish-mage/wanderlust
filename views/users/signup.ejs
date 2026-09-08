@@ -10,6 +10,7 @@
         <h2>Create your account</h2>
 
         <form action="/signup" method="POST" class="needs-validation" novalidate>
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
             <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
                 <input id="username" name="username" type="text" class="form-control" required />

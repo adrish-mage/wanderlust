@@ -4,25 +4,25 @@
       <span class="brand-mark"><img src="/image.png" alt="Dimora logo"></span>
       <span>Dimora</span>
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" >
-      <span class="navbar-toggler-icon"></span>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav site-nav-links">
-        <a class="nav-link" href="/">Home</a>
-        <a class="nav-link" href="/listings">Explore stays</a>
-        <a class="nav-link nav-link-accent" href="/listings/new"><i class="fa-solid fa-plus me-1"></i>Add a listing</a>
+        <a class="nav-link <%= currentPath === '/' ? 'nav-link-active' : '' %>" href="/" <%= currentPath === '/' ? 'aria-current="page"' : '' %>>Home</a>
+        <a class="nav-link <%= currentPath.startsWith('/listings') && !currentPath.includes('/new') ? 'nav-link-active' : '' %>" href="/listings" <%= currentPath.startsWith('/listings') && !currentPath.includes('/new') ? 'aria-current="page"' : '' %>>Explore stays</a>
+        <a class="nav-link nav-link-accent <%= currentPath === '/listings/new' ? 'nav-link-active' : '' %>" href="/listings/new" <%= currentPath === '/listings/new' ? 'aria-current="page"' : '' %>><i class="fa-solid fa-plus me-1" aria-hidden="true"></i>Add a listing</a>
       </div>
       <form class="navbar-nav d-flex ms-auto navbar-search" role="search" action="/listings" method="GET">
-        <input class="form-control me-2" type="search" name="q" value="<%= typeof search !== 'undefined' ? search : '' %>" placeholder="Search stays" aria-label="Search stays"/>
-        <button class="btn btn-outline-success" type="submit">
-            <i class="fa-solid fa-magnifying-glass"></i>
+        <input class="form-control me-2" type="search" name="q" value="<%= typeof search !== 'undefined' ? search : '' %>" placeholder="Search stays" aria-label="Search stays" autocomplete="off"/>
+        <button class="btn btn-outline-success" type="submit" aria-label="Search stays">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
         </button>
       </form>
       <div class="navbar-nav ms-auto site-account-links">
         <%if (!CurrUser) {%>
-        <a class="nav-link" href="/signup">Sign up</a>
-        <a class="nav-link" href="/login">Login</a>
+        <a class="nav-link <%= currentPath === '/signup' ? 'nav-link-active' : '' %>" href="/signup">Sign up</a>
+        <a class="nav-link <%= currentPath === '/login' ? 'nav-link-active' : '' %>" href="/login">Login</a>
         
         <%}%>
         <%if (CurrUser) {%>

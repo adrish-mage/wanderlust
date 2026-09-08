@@ -11,12 +11,30 @@
       if (!form.checkValidity()) {
         event.preventDefault()
         event.stopPropagation()
+        return
       }
 
       form.classList.add('was-validated')
+
+      const submitButton = form.querySelector('button[type="submit"], button:not([type])')
+      if (submitButton && !submitButton.disabled) {
+        submitButton.disabled = true
+        submitButton.classList.add('is-submitting')
+        submitButton.dataset.originalLabel = submitButton.innerHTML
+        submitButton.innerHTML = '<span class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span>Working...'
+        submitButton.setAttribute('aria-busy', 'true')
+      }
     }, false)
   })
 })()
+
+document.querySelectorAll('.flash-message').forEach(message => {
+  window.setTimeout(() => {
+    if (window.bootstrap) {
+      bootstrap.Alert.getOrCreateInstance(message).close()
+    }
+  }, 5500)
+})
 
 const imageInput = document.querySelector('#image')
 const imagePreview = document.querySelector('#image-preview')

@@ -58,7 +58,7 @@
                             <% const imgSrc=(listing && listing.image && listing.image.url) ? listing.image.url :
                                 (typeof listing.image==='string' ? listing.image : '' ); %>
                                 <div class="listing-image-wrap">
-                                    <img src="<%=imgSrc %>" class="card-img-top" alt="listing-image" />
+                                    <img src="<%=imgSrc %>" class="card-img-top" alt="<%= listing.title %>" loading="lazy" />
                                     <span class="listing-image-label">Dimora stay</span>
                                 </div>
                                 <div class="card-body">

@@ -6,6 +6,7 @@
             <h1 class="form-page-title">Edit this listing</h1>
             <p class="form-page-intro">Keep the details current so guests know what to expect.</p>
             <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" novalidate class="needs-validation" enctype="multipart/form-data">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                 <div class="mb-3">
                     <label for="title" class="form-label">Title</label>
                     <input 

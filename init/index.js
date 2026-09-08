@@ -8,8 +8,6 @@ const mongoose = require("mongoose");
 const initData = require("./data.js");
 const Listing = require("../models/listing.js");
 
-console.log(process.env.MONGO_URI);
-
 async function main(){
     await mongoose.connect(process.env.MONGO_URI);
 }
